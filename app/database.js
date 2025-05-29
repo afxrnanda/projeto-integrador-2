@@ -27,6 +27,7 @@ export const createTables = () => {
         setor TEXT,
         ocupado INTEGER DEFAULT 0,
         manutencao INTEGER DEFAULT 0,
+        alerta INTEGER DEFAULT 0,
         data_ultima_ocupacao TEXT,
         observacoes TEXT
       );
