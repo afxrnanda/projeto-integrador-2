@@ -67,3 +67,36 @@ export const atualizarStatusMedicacao = (
     });
 };
 
+export const getMedicacoes = (filtros = {}, callback) => {
+    let query = `SELECT * FROM medicacao_aplicada WHERE 1=1`;
+    let params = [];
+
+    if (filtros.paciente_id) {
+        query += ` AND paciente_id = ?`;
+        params.push(filtros.paciente_id);
+    }
+    if (filtros.medicamento_id) {
+        query += ` AND medicamento_id = ?`;
+        params.push(filtros.medicamento_id);
+    }
+    if (filtros.status) {
+        query += `AND status = ?`;
+        params.push(filtros.status);
+    }
+
+    query += `ORDER BY data_inicio DESC`;
+
+    db.transaction(tx => {
+        tx.executeSql(
+            query, 
+            params,
+            (_, { rows }) => {
+                callback(rows._array);
+            },
+            (_, error) => {
+                console.error('Erro ao buscar medicações:', error);
+                return false;
+            }
+        );
+    });
+};
