@@ -12,7 +12,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "app/database.js", "services/leitosService.js"  ],
+, "src/database/database.js", "services/leitosService.js"  ],
   "exclude": [
     "node_modules"
   ]

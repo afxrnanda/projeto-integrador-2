@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { createTable, insertLeito, getLeitos } from '../services/leitosService';
+import { insertLeito, getLeitos } from '../services/leitosService';
+import { createTables } from '@/src/database/createTable';
 
 interface Leito {
   leito_id: number;
@@ -13,7 +14,7 @@ export default function App() {
   const [leitos, setLeitos] = useState<Leito[]>([]);
 
   useEffect(() => {
-    createTable();
+    createTables();
 
     // Inserir exemplo só uma vez
     insertLeito("L101", "UTI", "Setor A", false, false, "2025-05-22T10:00:00", "Primeiro leito");
